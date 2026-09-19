@@ -1,0 +1,45 @@
+name: Guestbook
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+# One stamp at a time so two visitors can't race each other on the README.
+concurrency:
+  group: guestbook
+  cancel-in-progress: false
+
+jobs:
+  stamp:
+    if: contains(github.event.issue.labels.*.name, 'guestbook')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Write the entry into README.md
+        id: stamp
+        run: python3 .github/scripts/guestbook.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet && exit 0
+          git commit -m "guestbook: @${{ github.event.issue.user.login }} (#${{ github.event.issue.number }})"
+          git push origin main
+
+      - name: Thank the visitor and close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MESSAGE: ${{ steps.stamp.outputs.message }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --repo "${{ github.repository }}" \
+            --body "Stamped! Your note — *\"$MESSAGE\"* — is now printed on [the README](https://github.com/${{ github.repository }}#07--guestbook). Thanks for signing 🩷"
+          gh issue close "${{ github.event.issue.number }}" --repo "${{ github.repository }}" --reason completed

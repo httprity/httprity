@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-label="Samprity Haque — product designer and AI/ML developer. A two-ink risograph poster with halftone screens and deliberate misregistration.">
+  <title>Samprity Haque — Risograph Poster</title>
+  <desc>Two spot inks, screened at 15° and 75° so their dots interleave instead of covering each other. The blue plate prints first, the pink plate lands a moment later and four pixels off — and keeps drifting, the way a drum duplicator does.</desc>
+  <defs>
+    <!-- Halftone screens. Two inks angled 60° apart so the dots sit between
+         each other; plain alpha compositing then reads as a real two-ink overlap. -->
+    <pattern id="rp-pink-90" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <circle cx="5.5" cy="5.5" r="4.9" fill="#f0338c"/>
+    </pattern>
+    <pattern id="rp-pink-55" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <circle cx="5.5" cy="5.5" r="3.6" fill="#f0338c"/>
+    </pattern>
+    <pattern id="rp-pink-20" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <circle cx="5.5" cy="5.5" r="2.1" fill="#f0338c"/>
+    </pattern>
+    <pattern id="rp-blue-90" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(75)">
+      <circle cx="5.5" cy="5.5" r="4.9" fill="#1257a8"/>
+    </pattern>
+    <pattern id="rp-blue-40" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(75)">
+      <circle cx="5.5" cy="5.5" r="3.0" fill="#1257a8"/>
+    </pattern>
+
+    <!-- Uncoated stock. The seed is re-rolled a few times a second so the
+         grain shimmers like film instead of sitting still like a texture. -->
+    <filter id="rp-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="4" seed="19" result="n">
+        <animate attributeName="seed" values="19;7;31;3;23;11;19" dur="1.4s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.10  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.55 0"/>
+    </filter>
+
+    <clipPath id="rp-disc"><circle cx="944" cy="220" r="148"/></clipPath>
+    <clipPath id="rp-band"><rect x="72" y="292" width="560" height="86"/></clipPath>
+
+    <!-- Press passes. Each plate is revealed left-to-right by a clip rect
+         whose width animates; blue first, pink about half a second later. -->
+    <clipPath id="rp-pass-blue">
+      <rect x="0" y="0" width="0" height="460">
+        <animate attributeName="width" from="0" to="1200" begin="0.2s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+      </rect>
+    </clipPath>
+    <clipPath id="rp-pass-pink">
+      <rect x="0" y="0" width="0" height="460">
+        <animate attributeName="width" from="0" to="1200" begin="0.8s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="460" fill="#f4efe3"/>
+
+  <!-- Registration marks. They pulse once as each plate lands. -->
+  <g stroke="#16233a" stroke-width="1" opacity="0.65">
+    <animate attributeName="opacity" values="0.65;1;0.65;1;0.65" keyTimes="0;0.15;0.4;0.55;1" begin="0.2s" dur="2s" fill="freeze"/>
+    <g transform="translate(40,40)"><line x1="-11" y1="0" x2="11" y2="0"/><line x1="0" y1="-11" x2="0" y2="11"/><circle cx="0" cy="0" r="6.5" fill="none"/></g>
+    <g transform="translate(1160,40)"><line x1="-11" y1="0" x2="11" y2="0"/><line x1="0" y1="-11" x2="0" y2="11"/><circle cx="0" cy="0" r="6.5" fill="none"/></g>
+    <g transform="translate(40,420)"><line x1="-11" y1="0" x2="11" y2="0"/><line x1="0" y1="-11" x2="0" y2="11"/><circle cx="0" cy="0" r="6.5" fill="none"/></g>
+    <g transform="translate(1160,420)"><line x1="-11" y1="0" x2="11" y2="0"/><line x1="0" y1="-11" x2="0" y2="11"/><circle cx="0" cy="0" r="6.5" fill="none"/></g>
+  </g>
+
+  <!-- ================= BLUE PLATE (first pass) ================= -->
+  <g clip-path="url(#rp-pass-blue)">
+    <!-- The disc. The whole group turns very slowly, so the screen angle
+         creeps and the dots appear to breathe against the pink headline. -->
+    <g clip-path="url(#rp-disc)">
+      <g>
+        <animateTransform attributeName="transform" type="rotate" from="0 944 220" to="360 944 220" dur="90s" repeatCount="indefinite"/>
+        <rect x="736" y="12" width="416" height="416" fill="url(#rp-blue-90)"/>
+        <rect x="736" y="12" width="416" height="210" fill="url(#rp-blue-40)"/>
+      </g>
+    </g>
+
+    <!-- Blue copy of the headline. This is the plate that is out of register:
+         it drifts around its 4px offset on a slow loop, like a drum slipping. -->
+    <g opacity="0.85">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 2 -1; 0 1; -1 0; 0 0" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1"/>
+      <text x="68" y="153" font-family="'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif" font-size="100" font-weight="800" fill="#1257a8" letter-spacing="-4">SAMPRITY</text>
+      <text x="68" y="245" font-family="'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif" font-size="100" font-weight="800" fill="#1257a8" letter-spacing="-4">HAQUE</text>
+    </g>
+
+    <text x="74" y="276" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="12" fill="#1257a8" letter-spacing="6">PRODUCT DESIGNER · AI/ML DEVELOPER · DHAKA</text>
+    <!-- Cursor after the role line -->
+    <rect x="522" y="265" width="8" height="13" fill="#1257a8">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" begin="1.6s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- ================= PINK PLATE (second pass) ================= -->
+  <g clip-path="url(#rp-pass-pink)">
+    <!-- Tone band under the body copy -->
+    <g clip-path="url(#rp-band)">
+      <rect x="72" y="292" width="560" height="86" fill="url(#rp-pink-20)"/>
+    </g>
+
+    <!-- Pink headline, 4px off the blue one. Both layers must say the same thing. -->
+    <text x="72" y="150" font-family="'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif" font-size="100" font-weight="800" fill="#f0338c" letter-spacing="-4">SAMPRITY</text>
+    <text x="72" y="242" font-family="'Helvetica Neue', Helvetica, Arial, system-ui, sans-serif" font-size="100" font-weight="800" fill="#f0338c" letter-spacing="-4">HAQUE</text>
+  </g>
+
+  <!-- ================= BLACK PLATE (body copy) ================= -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="1.7s" dur="0.5s" fill="freeze"/>
+    <text x="96" y="324" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#101a2c">I turn pixels into products and models into experiences.</text>
+    <text x="96" y="350" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#101a2c">Design, AI &amp; software — usually all three at once.</text>
+  </g>
+
+  <!-- Colour bars, as on a press sheet. They stamp in one after another. -->
+  <g transform="translate(72,396)">
+    <rect x="0" y="0" width="26" height="12" fill="#f0338c" opacity="0"><animate attributeName="opacity" to="1" begin="1.9s" dur="0.15s" fill="freeze"/></rect>
+    <rect x="30" y="0" width="26" height="12" fill="#1257a8" opacity="0"><animate attributeName="opacity" to="1" begin="2.05s" dur="0.15s" fill="freeze"/></rect>
+    <rect x="60" y="0" width="26" height="12" fill="url(#rp-pink-55)" opacity="0"><animate attributeName="opacity" to="1" begin="2.2s" dur="0.15s" fill="freeze"/></rect>
+    <rect x="90" y="0" width="26" height="12" fill="url(#rp-blue-40)" opacity="0"><animate attributeName="opacity" to="1" begin="2.35s" dur="0.15s" fill="freeze"/></rect>
+    <rect x="120" y="0" width="26" height="12" fill="url(#rp-pink-20)" opacity="0"><animate attributeName="opacity" to="1" begin="2.5s" dur="0.15s" fill="freeze"/></rect>
+  </g>
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="2.4s" dur="0.6s" fill="freeze"/>
+    <text x="240" y="406" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="9.5" fill="#5c6474" letter-spacing="2.5">RISO 2-COLOUR · FLUORO PINK 1017 + FEDERAL BLUE 1023</text>
+    <text x="1128" y="406" text-anchor="end" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="9.5" fill="#5c6474" letter-spacing="2.5">EDITION OF 1 · GITHUB.COM/HTTPRITY</text>
+  </g>
+
+  <!-- Grain goes on last; on the real thing it sits on top of the ink too. -->
+  <rect width="1200" height="460" filter="url(#rp-grain)" opacity="0.6"/>
+</svg>

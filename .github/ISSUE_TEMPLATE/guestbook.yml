@@ -1,0 +1,18 @@
+name: ✍️ Sign the guestbook
+description: Leave a short note on my profile README. It gets printed on the page automatically.
+title: "guestbook: hello!"
+labels: ["guestbook"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for stopping by! Write a line below and hit **Submit new issue**.
+        A bot will stamp your name and note onto the README and close this issue in about a minute.
+  - type: textarea
+    id: message
+    attributes:
+      label: Message
+      description: One line is plenty. Keep it kind — it's printed publicly.
+      placeholder: "Loved the riso poster 🩷"
+    validations:
+      required: true

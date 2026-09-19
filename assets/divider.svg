@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 28" width="1200" height="28" role="img" aria-label="Section divider — risograph colour bar">
+  <defs>
+    <pattern id="dv-pink-55" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <circle cx="5.5" cy="5.5" r="3.6" fill="#f0338c"/>
+    </pattern>
+    <pattern id="dv-blue-40" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(75)">
+      <circle cx="5.5" cy="5.5" r="3.0" fill="#1257a8"/>
+    </pattern>
+    <pattern id="dv-pink-20" width="11" height="11" patternUnits="userSpaceOnUse" patternTransform="rotate(15)">
+      <circle cx="5.5" cy="5.5" r="2.1" fill="#f0338c"/>
+    </pattern>
+    <filter id="dv-grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="3" seed="5" result="n">
+        <animate attributeName="seed" values="5;17;2;29;5" dur="1.4s" calcMode="discrete" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.10  0 0 0 0 0.09  0 0 0 0 0.07  0 0 0 0.55 0"/>
+    </filter>
+    <clipPath id="dv-pass">
+      <rect x="0" y="0" width="0" height="28">
+        <animate attributeName="width" from="0" to="1200" begin="0.1s" dur="1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="28" fill="#f4efe3"/>
+
+  <g clip-path="url(#dv-pass)">
+    <!-- Registration ticks -->
+    <g stroke="#16233a" stroke-width="1" opacity="0.65">
+      <line x1="40" y1="8" x2="40" y2="20"/><line x1="34" y1="14" x2="46" y2="14"/>
+      <line x1="1160" y1="8" x2="1160" y2="20"/><line x1="1154" y1="14" x2="1166" y2="14"/>
+    </g>
+
+    <!-- Colour bar. The chips step through the press sequence on a loop. -->
+    <g transform="translate(72,8)">
+      <rect x="0"   y="0" width="26" height="12" fill="#f0338c"/>
+      <rect x="30"  y="0" width="26" height="12" fill="#1257a8"/>
+      <rect x="60"  y="0" width="26" height="12" fill="url(#dv-pink-55)"/>
+      <rect x="90"  y="0" width="26" height="12" fill="url(#dv-blue-40)"/>
+      <rect x="120" y="0" width="26" height="12" fill="url(#dv-pink-20)"/>
+      <!-- press-check marker sliding across the chips -->
+      <rect x="0" y="-2" width="26" height="16" fill="none" stroke="#101a2c" stroke-width="1">
+        <animate attributeName="x" values="0;30;60;90;120;0" dur="4s" calcMode="discrete" begin="1.2s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <!-- Rule with a slow pink/blue shimmer -->
+    <line x1="240" y1="14" x2="1128" y2="14" stroke="#1257a8" stroke-width="1" opacity="0.35"/>
+    <rect x="240" y="13.5" width="120" height="1" fill="#f0338c">
+      <animate attributeName="x" from="240" to="1008" dur="6s" begin="1.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1"/>
+      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.9;1" dur="6s" begin="1.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <rect width="1200" height="28" filter="url(#dv-grain)" opacity="0.6"/>
+</svg>
